@@ -1,21 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
   labels:
-    app: my-app
+    app: reverseproxy
+  name: reverseproxy
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: my-app
+        app: reverseproxy
   template:
     metadata:
       labels:
-        app: my-app
+        app: reverseproxy
     spec:
       containers:
-      - name: simple-api
-        image: anuragdhiman400/simple-node-travic
+      - image: anuragdhiman400/simple-node-reverseproxy
+        name: reverseproxy
+        imagePullPolicy: Always          
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"       
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+      restartPolicy: Always
