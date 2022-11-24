@@ -15,8 +15,8 @@ before_script:
 
 script:
   - docker --version # print the version for logging
-  - docker build -t simple-node-reverseproxy .
-  - docker tag simple-node-reverseproxy anuragdhiman400/simple-node-reverseproxy:latest
+  - docker build -t simple-reverseproxy .
+  - docker tag simple-reverseproxy anuragdhiman400/simple-node-reverseproxy:latest
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
